@@ -1,0 +1,67 @@
+﻿@page "/"
+
+<h1>Enter 4 integers and 2 words</h1>
+
+    <label for="low">Lower number:</label>
+    <br>
+    <input type="text" id="low" @bind="low">
+    <br>
+    <label for="high">Higher number:</label>
+    <br>
+    <input type="text" id="high" @bind="high" >
+    <br>
+    <br>
+    <label for="num1">Number 1 (below higher):</label>
+    <br>
+    <input type="text" id="num1" @bind="num1">
+    <br>
+    <label for="num2">Number 2 (below higher):</label>
+    <br>
+    <input type="text" id="num2" @bind="num2" >
+    <br>
+    <br>
+    <label for="word1">Word 1:</label>
+    <br>
+    <input type="text" id="word1" @bind="word1" >
+    <br>
+    <label for="word2">Word 2:</label>
+    <br>
+    <input type="text" id="word2" @bind="word2">
+    <br>
+    <br>
+    <button @onclick="Submit">Submit</button>
+
+
+    @foreach (var result in results)
+    {
+        <tr>
+            <td>@result</td>
+        </tr>
+    }
+
+
+@code{
+    private List<string> results = new List<string>();
+    private string low;
+    private string high;
+    private string num1;
+    private string num2;
+    private string word1;
+    private string word2;
+
+    private void Submit()
+    {
+        results.Clear();
+        
+        if (Int32.Parse(low) > 0 && Int32.Parse(high) > 0 && Int32.Parse(low) < Int32.Parse(high) && Int32.Parse(num1) > 0 && Int32.Parse(num2) > 0)
+        {
+
+            Calc test = new Calc(Int32.Parse(low), Int32.Parse(high), Int32.Parse(num1), Int32.Parse(num2), word1, word2);
+
+            for (int i = test.getLower(); i <= test.getUpper(); i++)
+                results.Add(test.result(i));
+        }
+        else
+            results.Add("Please enter numbers above 0");
+    }
+}
