@@ -27,7 +27,9 @@ namespace CMProject
         
         public string result(int n)
         {
-            if (n % num1 == 0 && n % num2 == 0)
+            if (lower <= 0 || upper <= 0 || lower >= upper || num1 <= 0 || num2 <= 0 || num1 >= upper || num2 >= upper)
+                return "error";
+            else if (n % num1 == 0 && n % num2 == 0)
                 return word1 + " " + word2;
             else if (n % num1 == 0)
                 return word1;
@@ -39,12 +41,15 @@ namespace CMProject
 
         public string result(int n, int n1, int n2, string w1, string w2)
         {
-            if (n % n1 ==0 && n % n2 == 0)
+            if (n1 <= 0 || n2 <= 0)
+                return "error";
+            else if (n % n1 ==0 && n % n2 == 0)
                 return w1 + " " + w2;
             else if (n % n1 == 0)
                 return w1;
             else if (n % n2 == 0)
                 return w2;
+            
             else
                 return n.ToString();
         }
